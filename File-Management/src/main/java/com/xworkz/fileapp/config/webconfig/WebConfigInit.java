@@ -19,4 +19,6 @@ public class WebConfigInit extends AbstractAnnotationConfigDispatcherServletInit
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
+
 }

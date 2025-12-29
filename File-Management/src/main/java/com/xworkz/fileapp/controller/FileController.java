@@ -27,9 +27,9 @@ public class FileController {
         System.out.println(fileDto);
 
         boolean valid=fileService.validAndSave(fileDto);
-        if(!valid)return "Result.jsp";
+        if(!valid)return "Result";
             else
-        return "Error.jsp";
+        return "Error";
     }
 
     @GetMapping("/search")
@@ -39,7 +39,7 @@ public class FileController {
         Optional<FileDto> dto= fileService.getName(fileName);
         model.addAttribute("file",dto.get());
         System.out.println("controller"+dto);
-        return "Search.jsp";
+        return "Search";
     }
 
     @GetMapping("/getFile/{name}")
@@ -48,18 +48,18 @@ public class FileController {
         Optional<FileDto> dto= fileService.getName(fileName);
         model.addAttribute("fileDto",dto.get());
 
-        return "/UpdateFile.jsp";
+        return "UpdateFile";
     }
 
 
-    @PostMapping("/update  ")
+    @PostMapping("/update")
     public String updateFile(FileDto fileDto){
         System.out.println("Update file is started");
         System.out.println(fileDto);
         boolean valid=fileService.updateAndSave(fileDto);
-        if(!valid)return "/Result.jsp";
+        if(!valid)return "/Result";
         else
-            return "/Error.jsp";
+            return "Error";
     }
 
 }

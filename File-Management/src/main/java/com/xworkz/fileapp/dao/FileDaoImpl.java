@@ -1,7 +1,12 @@
 package com.xworkz.fileapp.dao;
 
+import com.mysql.cj.LicenseConfiguration;
 import com.xworkz.fileapp.dto.FileDto;
 import lombok.SneakyThrows;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.swing.plaf.PanelUI;
@@ -27,10 +32,26 @@ public class FileDaoImpl implements FileDao{
     String user="root";
     String password="@0995DuKe";
 
+
+
     @SneakyThrows
     @Override
     public boolean saveFile(FileDto fileDto) {
-        System.out.println("Save file dao is started");
+        System.out.println("hibernate connection is started");
+        Configuration configuration=new Configuration() ;
+        configuration.configure();
+        configuration.addAnnotatedClass(FileDto.class);
+        SessionFactory sessionFactory=configuration.buildSessionFactory();
+        Session session=sessionFactory.openSession();
+        Transaction transaction=session.beginTransaction();
+        session.save(fileDto);
+        transaction.commit();
+
+        return true;
+
+    }
+
+      /*  System.out.println("Save file dao is started");
 
         String sqlQuery="insert into file_apps(fileName,fileType,fileSize,fileid) values (?,?,?,?)";
         try(Connection connection= DriverManager.getConnection(url,user,password);
@@ -51,7 +72,7 @@ public class FileDaoImpl implements FileDao{
         }
 
         return false;
-    }
+    }*/
 @SneakyThrows
     @Override
 

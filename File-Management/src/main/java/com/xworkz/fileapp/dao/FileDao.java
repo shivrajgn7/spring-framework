@@ -8,7 +8,9 @@ import java.util.Optional;
 public interface FileDao {
     boolean saveFile(FileDto fileDto);
 
-    Optional<FileDto> getByName(String name);
+   // Optional<FileDto> getByName(String name);
 
 boolean updateByName(FileDto fileDto);
+
+    Optional<FileDto> getByName(String fileName);
 }
